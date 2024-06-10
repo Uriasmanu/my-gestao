@@ -1,10 +1,11 @@
 import './App.css';
-import ChamadaApi from './Componentes/ChamadaApi';
+import AdicionarProduto from './Componentes/AdicionarProduto';
+
 
 function App() {
   return (
     <div className="App">
-      <ChamadaApi/>
+      <AdicionarProduto/>
     </div>
   );
 }
