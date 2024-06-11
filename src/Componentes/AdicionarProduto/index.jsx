@@ -1,6 +1,6 @@
-const { useState } = require("react");
+import React, { useState } from 'react';
 
-function AdicionarProduto() {
+function AdicionarProduto({ onAddProduto }) {
     const [nome, setNome] = useState('');
     const [quantidade, setQuantidade] = useState('');
 
@@ -17,7 +17,10 @@ function AdicionarProduto() {
             if (!response.ok) {
                 throw new Error('Erro ao adicionar produto');
             }
-            alert('Produto adicionado com sucesso!');
+            const novoProduto = await response.json();
+            onAddProduto(novoProduto); // Atualiza a lista de produtos no componente pai
+            setNome(''); // Limpa o campo nome
+            setQuantidade(''); // Limpa o campo quantidade
         } catch (error) {
             console.error('Erro:', error);
         }
@@ -41,4 +44,4 @@ function AdicionarProduto() {
     );
 }
 
-export default AdicionarProduto
+export default AdicionarProduto;
