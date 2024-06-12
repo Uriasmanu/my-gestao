@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import Home from './Componentes/Home';
-
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Login from './Componentes/Login';
 
 
 function App() {
@@ -45,9 +46,14 @@ function App() {
     };
 
     return (
-        <div className="App">
-            <Home/>
-        </div>
+        <Router>
+          <div className="App">
+            <Routes>
+              <Route path="/login" exact element={<Login/>} />
+              {/* Add your other routes here */}
+            </Routes>
+          </div>
+        </Router>
     );
 }
 
