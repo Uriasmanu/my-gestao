@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import AdicionarProduto from './Componentes/AdicionarProduto';
-import AtualizarProduto from './Componentes/AtualizarProduto';
-import MostrarProdutos from './Componentes/MostrarProdutos';
-import RemoverProduto from './Componentes/RemoverProduto';
+import Home from './Componentes/Home';
+
+
 
 function App() {
     const [produtos, setProdutos] = useState([]);
@@ -47,10 +46,7 @@ function App() {
 
     return (
         <div className="App">
-            <MostrarProdutos produtos={produtos} />
-            <AdicionarProduto onAddProduto={adicionarProduto} />
-            <RemoverProduto />
-            <AtualizarProduto />
+            <Home/>
         </div>
     );
 }

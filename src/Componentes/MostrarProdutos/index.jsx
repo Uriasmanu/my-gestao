@@ -7,7 +7,7 @@ function MostrarProdutos({ produtos }) {
             <ul>
                 {produtos.map((produto, index) => (
                     <li key={index}>
-                        {produto.nome} - {produto.quantidade}
+                       {produto.id} - {produto.nome} - {produto.quantidade}
                     </li>
                 ))}
             </ul>
