@@ -8,7 +8,7 @@ function AtualizarProduto() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await fetch(`https://myloja-api.azurewebsites.net/estoque/${id}`, {
+            const response = await fetch(`https://localhost:7285/estoque/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

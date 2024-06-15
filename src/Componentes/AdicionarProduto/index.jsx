@@ -7,7 +7,7 @@ function AdicionarProduto({ onAddProduto }) {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await fetch('https://myloja-api.azurewebsites.net/estoque', {
+            const response = await fetch('https://localhost:7285/estoque', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

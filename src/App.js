@@ -12,7 +12,7 @@ function App() {
         // Fetch produtos ao montar o componente
         const fetchProdutos = async () => {
             try {
-                const response = await fetch('https://myloja-api.azurewebsites.net/estoque');
+                const response = await fetch('https://localhost:7285/estoque');
                 if (!response.ok) {
                     throw new Error('Erro ao buscar produtos');
                 }
@@ -28,7 +28,7 @@ function App() {
 
     const adicionarProduto = async (produto) => {
         try {
-            const response = await fetch('https://myloja-api.azurewebsites.net/estoque', {
+            const response = await fetch('https://localhost:7285/estoque', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -49,6 +49,7 @@ function App() {
         <Router>
           <div className="App">
             <Routes>
+            <Route path="/" element={<Home/>} />
               <Route path="/login" exact element={<Login/>} />
               {/* Add your other routes here */}
             </Routes>

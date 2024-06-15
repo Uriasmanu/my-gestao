@@ -1,7 +1,27 @@
 import { styled } from "styled-components"
+import voltar from "../../icons/voltar.svg";
+import { useState } from "react";
+
+
+
+const Voltsr = styled.div`
+  position: absolute;
+    margin: 2%;
+    width: 42px;
+    height: 42px;
+
+    img{
+      width: 100%;
+      height: 100%;
+    }
+`
 
 const LoginCard = styled.div`
-
+  width: 100%;
+  height: 100vh;
+  display: flex;
+    align-items: center;
+    justify-content: center;
 
 
 .form {
@@ -10,9 +30,10 @@ const LoginCard = styled.div`
   gap: 10px;
   background-color: #ffffff;
   padding: 30px;
-  width: 450px;
+  width: 20rem;
   border-radius: 20px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.5);
 }
 
 ::placeholder {
@@ -121,50 +142,78 @@ const LoginCard = styled.div`
   ;
 }
 
-    
 `
 
+
 const Login = () => {
+  const [Email, SetEmail] = useState("");
+  const [Senha, SetSenha] = useState("");
+  const [error, setError] = useState("");
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+        const response = await fetch('https://localhost:7285/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email: Email.trim(), senha: Senha.trim() }),
+        });
+        if (!response.ok) {
+            throw new Error('Email ou senha incorreta');
+        }
+        const data = await response.json();
+      console.log('Login bem-sucedido:', data);
+      // Aqui você pode redirecionar o usuário para outra página ou realizar outra ação.
+    } catch (error) {
+      console.error('Erro:', error);
+      setError(error.message);
+    }
+  };
   return (
+    <>
+    <Voltsr>
+    <img src={voltar} alt="Voltar" />
+    </Voltsr>
     <LoginCard >
-      <form class="form">
-        <div class="flex-column">
+      
+      <form class="form" onSubmit={handleSubmit}>
+        <div className="flex-column">
           <label>Email </label></div>
-        <div class="inputForm">
-         
-          <input type="text" class="input" placeholder="Enter your Email" />
+        <div className="inputForm">
+
+          <input 
+          type="text" 
+          className="input" 
+          onChange={(e) => SetEmail(e.target.value)}
+          value={Email}
+          />
         </div>
 
-        <div class="flex-column">
-          <label>Password </label></div>
-        <div class="inputForm">
-         
+        <div className="flex-column">
+          <label>Senha </label></div>
+        <div className="inputForm">
+        <input 
+        type="text" 
+        className="input" 
+        onChange={(e) => SetSenha(e.target.value)}
+        value={Senha}
+        />
+
         </div>
 
-        <div class="flex-row">
+        <div className="flex-row">
           <div>
-            <input type="checkbox" />
-            <label>Remember me </label>
+
           </div>
-          <span class="span">Forgot password?</span>
+          <span className="span">Esqueceu a senha?</span>
         </div>
-        <button class="button-submit">Sign In</button>
-        <p class="p">Don't have an account? <span class="span">Sign Up</span>
-
-        </p><p class="p line">Or With</p>
-
-        <div class="flex-row">
-          <button class="btn google">
-
-
-          </button><button class="btn apple">
-            
-
-            Apple
-
-          </button></div>
+        {error && <p className="error">{error}</p>}
+          <button className="button-submit">Entrar</button>
       </form>
     </LoginCard>
+    </>
   )
 
 }
