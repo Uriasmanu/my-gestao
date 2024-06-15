@@ -178,7 +178,7 @@ const Login = () => {
     </Voltsr>
     <LoginCard >
       
-      <form class="form" onSubmit={handleSubmit}>
+      <form className="form" onSubmit={handleSubmit}>
         <div className="flex-column">
           <label>Email </label></div>
         <div className="inputForm">
